@@ -1,0 +1,35 @@
+{
+  "name": "pwa-workshop",
+  "version": "1.0.0",
+  "description": "BYND progressive web app workshop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-simonstaton:simonstaton/pwa-workshop.git"
+  },
+  "author": "Simon Staton <simon.staton@live.co.uk>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "7.19.1",
+    "@babel/preset-env": "7.19.1",
+    "autoprefixer": "10.4.12",
+    "babel-loader": "8.2.5",
+    "css-loader": "6.7.1",
+    "html-webpack-plugin": "5.5.0",
+    "postcss": "8.4.16",
+    "postcss-loader": "7.0.1",
+    "postcss-preset-env": "7.8.2",
+    "prettier": "2.7.1",
+    "style-loader": "3.3.1",
+    "tailwindcss": "3.1.8",
+    "webpack": "5.74.0",
+    "webpack-cli": "4.10.0",
+    "webpack-dev-server": "4.11.1"
+  },
+  "browserslist": "> 0.25%, not dead"
+}

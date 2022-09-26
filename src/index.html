@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-expand-lg shadow-md py-2 bg-white relative flex items-center w-full justify-between"
+      >
+        <div class="px-6 w-full flex flex-wrap items-center justify-between">
+          <div class="grow items-center">
+            <ul class="navbar-nav mr-auto lg:flex lg:flex-row">
+              <li class="nav-item">
+                <a
+                  class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
+                  href="/"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
+                  href="/about.html"
+                  >About</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div
+        class="text-center bg-gray-50 text-gray-800 py-20 px-6 border-b-2 border-gray-200"
+      >
+        <h1 class="text-5xl font-bold mt-0 mb-6">IMDB Search</h1>
+        <h3 class="text-3xl font-bold mb-8">
+          Movie search, details and ratings
+        </h3>
+      </div>
+    </header>
+    <div id="container" class="divide-y">
+      <div
+        class="w-full max-w-xs mx-auto my-0 py-5"
+        id="search-container"
+      ></div>
+      <div>
+        <div id="movies-container" class="max-w-3xl my-0 mx-auto"></div>
+      </div>
+    </div>
+    <template id="template-search">
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+            Title (required)
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text"
+            id="title"
+            name="title"
+            required
+            placeholder="Movie Title"
+          />
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="year">
+            Year
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="number"
+            id="year"
+            name="year"
+            placeholder="Year"
+            min="1900"
+            max="2022"
+          />
+        </div>
+        <div class="flex items-center justify-between">
+          <button
+            class="search-submit bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Search
+          </button>
+          <button
+            style="display: none"
+            type="button"
+            class="inline-flex items-center search-loading bg-blue-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease-in-out duration-150 cursor-not-allowed"
+            disabled=""
+          >
+            <svg
+              class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            Loading...
+          </button>
+        </div>
+      </form>
+    </template>
+    <template id="template-movies-not-found">
+      <div
+        class="bg-yellow-100 rounded-lg py-5 px-6 mb-4 text-base text-yellow-700 mb-3 my-3"
+        role="alert"
+      >
+        No movies found for this search!
+      </div>
+    </template>
+    <template id="template-movies">
+      <div class="py-5 px-3">
+        <div
+          class="grid lg:grid-cols-3 gap-6 items-stretch movie-wrapper"
+        ></div>
+      </div>
+    </template>
+    <template id="template-movie">
+      <div class="movie-card-wrapper">
+        <div class="movie-card">
+          <div class="movie-card-front">
+            <div
+              class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+              style="background-position: 50%"
+            >
+              <img
+                class="w-full transition duration-300 ease-linear align-middle movie-image"
+              />
+              <button
+                type="button"
+                class="movie-btn absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed"
+              >
+                <div
+                  class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed"
+                  style="background-color: rgba(0, 0, 0, 0.3)"
+                >
+                  <div class="flex justify-start items-end h-full">
+                    <h5
+                      class="text-lg font-bold text-white m-6 movie-title"
+                    ></h5>
+                  </div>
+                </div>
+                <div class="hover-overlay">
+                  <div
+                    class="mask absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100"
+                    style="background-color: rgba(253, 253, 253, 0.15)"
+                  ></div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="movie-card-back">
+            <p><strong>Movie Details</strong></p>
+            <ul>
+              <li>
+                <strong>Title:</strong>
+                <span class="movie-details-title"></span>
+              </li>
+              <li>
+                <strong>IMDB Rating:</strong
+                ><span class="movie-details-rating"></span>
+              </li>
+              <li>
+                <strong>Year:</strong> <span class="movie-details-year"></span>
+              </li>
+              <li>
+                <strong>Released:</strong
+                ><span class="movie-details-released"></span>
+              </li>
+              <li>
+                <strong>Runtime:</strong
+                ><span class="movie-details-runtime"></span>
+              </li>
+              <li>
+                <strong>Genre:</strong>
+                <span class="movie-details-genre"></span>
+              </li>
+              <li>
+                <strong>Director:</strong
+                ><span class="movie-details-director"></span>
+              </li>
+              <li>
+                <strong>Writer:</strong
+                ><span class="movie-details-writer"></span>
+              </li>
+              <li>
+                <strong>Actors:</strong
+                ><span class="movie-details-actors"></span>
+              </li>
+              <li>
+                <strong>Plot:</strong> <span class="movie-details-plot"></span>
+              </li>
+              <li>
+                <strong>Language:</strong
+                ><span class="movie-details-language"></span>
+              </li>
+              <li>
+                <strong>Country:</strong
+                ><span class="movie-details-country"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </template>
+  </body>
+</html>

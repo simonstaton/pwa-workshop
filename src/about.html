@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-expand-lg shadow-md py-2 bg-white relative flex items-center w-full justify-between"
+      >
+        <div class="px-6 w-full flex flex-wrap items-center justify-between">
+          <div class="grow items-center">
+            <ul class="navbar-nav mr-auto lg:flex lg:flex-row">
+              <li class="nav-item">
+                <a
+                  class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
+                  href="/"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
+                  href="/about.html"
+                  >About</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div
+        class="text-center bg-gray-50 text-gray-800 py-20 px-6 border-b-2 border-gray-200"
+      >
+        <h1 class="text-5xl font-bold mt-0 mb-6">About</h1>
+        <h3 class="text-3xl font-bold mb-8">
+          Movie search, details and ratings
+        </h3>
+      </div>
+    </header>
+    <div id="container" class="divide-y">
+      <div class="w-full max-w-xs mx-auto my-0 py-5">
+        <img src="<%=require('./image.jpeg')%>" />
+        <p>
+          Occaecat ex esse eiusmod sunt ex eiusmod dolor et do commodo aute
+          pariatur Lorem consectetur. Dolor duis reprehenderit est adipisicing
+          cupidatat exercitation dolore in est duis enim non eu. Non qui
+          deserunt nulla exercitation incididunt ipsum exercitation laborum
+          labore. Proident commodo velit laboris ea. Non commodo velit velit
+          consectetur. Dolor pariatur voluptate quis qui veniam aliqua laborum
+          do. Reprehenderit reprehenderit amet irure laboris consequat do.
+        </p>
+        <p>
+          Reprehenderit laboris ea culpa eiusmod id ipsum cillum. Esse elit sint
+          enim dolore labore. Nulla sunt anim irure nisi ex duis ad esse
+          deserunt est. In veniam adipisicing nisi do cillum eu officia
+          incididunt irure aliquip officia laborum.
+        </p>
+        <p>
+          Id cupidatat sint elit non labore ad sit cillum eu ex eiusmod nostrud
+          quis. Consectetur sunt qui ullamco irure ullamco aliqua id ea quis.
+          Irure ut ipsum adipisicing deserunt veniam ipsum exercitation pariatur
+          elit ex consequat tempor. Exercitation proident elit do enim ex culpa
+          dolore id ea consequat.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
